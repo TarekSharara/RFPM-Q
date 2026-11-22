@@ -1,6 +1,6 @@
 /* RFPM Qual – offline service worker. Change VERSION after every update of index.html */
 const PREFIX = "rfq-qual-";
-const VERSION = PREFIX + "v2";
+const VERSION = PREFIX + "v3";
 const CORE = ["./", "./index.html", "./manifest.webmanifest", "./rfq-icon-180.png", "./rfq-icon-192.png", "./rfq-icon-512.png"];
 
 self.addEventListener("install", e => {
