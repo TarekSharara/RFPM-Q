@@ -1,0 +1,27 @@
+{
+  "name": "RFPM Qual",
+  "short_name": "RFPM Qual",
+  "description": "25m Rapid-Fire Pistol Qualification Simulator",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#EEF2F1",
+  "theme_color": "#6E2C2C",
+  "icons": [
+    {
+      "src": "rfq-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "rfq-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
