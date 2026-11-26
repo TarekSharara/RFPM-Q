@@ -50,6 +50,10 @@ button:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visi
 h1{font-family:var(--f-disp); font-weight:700; font-size:clamp(28px,4vw,42px); line-height:1.15; margin:2px 0 4px; text-wrap:balance}
 .lead{margin:0; color:var(--muted); max-width:62ch}
 .hdr-side{display:flex; flex-direction:column; gap:10px; align-items:flex-end}
+.hdr-top{display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap; width:100%}
+.hdr-top>div:first-child{flex:1 1 520px; min-width:0}
+.aibox{flex:0 1 auto; border:2px solid #E0362C; color:#E0362C; padding:22px 18px; text-align:center; font-weight:700; line-height:1.7; font-size:clamp(14px,1.6vw,17px); font-family:Arial,"Segoe UI",sans-serif; background:transparent; margin-inline:auto}
+.aibox[hidden]{display:none}
 .langbtn{border:1px solid var(--line); background:var(--panel); border-radius:999px; padding:6px 16px; font-weight:700; cursor:pointer}
 .phasechips{display:flex; gap:6px; flex-wrap:wrap}
 .pchip{border:1px solid var(--line); background:var(--panel); color:var(--muted); border-radius:999px; padding:4px 12px; font-size:13px; cursor:pointer}
@@ -281,11 +285,14 @@ body[dir="rtl"] .resrow .boardcard{order:0}
 <body dir="rtl">
 <div class="wrap">
   <header class="hdr">
+    <div class="hdr-top">
     <div>
       <p class="eyebrow" id="eyebrow"></p>
       <h1 id="h1"></h1>
       <p class="lead" id="lead"></p>
       <p class="byline" id="byline"></p>
+    </div>
+    <div class="aibox" id="aivoice" hidden></div>
     </div>
     <div class="hdr-side">
       <div class="row"><div class="seg evseg" role="group" aria-label="Event"><button id="evm" aria-pressed="true"></button><button id="evw" aria-pressed="false"></button></div><button class="langbtn" id="sndbtn" aria-pressed="true"></button><button class="langbtn" id="fsbtn" hidden></button><button class="langbtn" id="langbtn"></button></div>
@@ -346,7 +353,9 @@ body[dir="rtl"] .resrow .boardcard{order:0}
           <div class="row"><span class="small" id="speedl"></span><div class="seg" role="group"><button id="sp1" aria-pressed="true">×1</button><button id="sp2" aria-pressed="false">×2</button><button id="sp4" aria-pressed="false">×4</button><button id="sp8" aria-pressed="false">×8</button><button id="sp16" aria-pressed="false">×16</button></div>
             <label class="row small" style="margin-inline-start:auto"><input type="checkbox" id="quizme"><span id="quizmel"></span></label></div>
           <div class="row"><button class="btn" id="bvoice"></button><select class="grow" id="vmode" aria-label="Narration"></select></div>
-          <div class="row"><select class="grow" id="vrate" aria-label="Rate"></select><select class="grow" id="vvoice" aria-label="Voice"></select></div>
+          <div class="row"><select class="grow" id="vrate" aria-label="Rate"></select></div>
+          <div class="row" style="align-items:center"><label class="small" for="vvoice" id="vvoicel" style="min-width:7.5em"></label><select class="grow" id="vvoice" aria-label="English voice"></select><button class="btn" id="vtesten" type="button">▶</button></div>
+          <div class="row" style="align-items:center"><label class="small" for="vvoicear" id="vvoicearl" style="min-width:7.5em"></label><select class="grow" id="vvoicear" aria-label="Arabic voice"></select><button class="btn" id="vtestar" type="button">▶</button></div>
           <div class="row"><select class="grow" id="scen" aria-label="Scenario"></select><button class="btn" id="bstart"></button></div>
           <p class="small" id="scennote" style="margin:0"></p>
           <p class="small kbd" id="kbdhint" style="margin:0"></p>
@@ -418,7 +427,7 @@ ar:{eyebrow:"المسدس السريع 25م رجال · التأهيل · مرح
  step:"الخطوة",of:"من",cmdcap:"أوامر رئيس ضباط الميدان / ضابط الميدان وتوقيتها",nocmd:"لا يوجد أمر في هذه الخطوة",train:"⏱ تدريب رئيس ضباط الميدان بالزمن الحقيقي من هنا",
  sayAt:"عند الصفر قل:",sayNow:"قل الآن",wait:"انتظر",pause:"إيقاف مؤقت",resume:"استئناف",nextStage:"المرحلة التالية",close:"إغلاق",auto:"أكمل التالي تلقائياً",beep:"تنبيه صوتي",
  prev:"→ السابق",next:"التالي ←",play:"▶ تشغيل",stop:"■ إيقاف",speed:"السرعة",quizme:"اختبرني قبل كل خطوة",
- voiceOn:"🔊 تشغيل الشرح الصوتي",voiceOff:"🔇 إيقاف الشرح الصوتي",vmode:["الشرح والأوامر","الأوامر فقط"],vrate:["قراءة عادية","قراءة بطيئة","قراءة سريعة"],novoice:"الصوت الافتراضي للجهاز",
+ voiceOn:"🔊 تشغيل الشرح الصوتي",voiceOff:"🔇 إيقاف الشرح الصوتي",vmode:["الشرح والأوامر","الأوامر فقط"],vrate:["قراءة عادية","قراءة بطيئة","قراءة سريعة"],novoice:"الصوت الافتراضي للجهاز",vEnL:"الصوت الإنجليزي (الأوامر)",vArL:"الصوت العربي (الشرح)",
  scen:["سيناريو نتائج جديد…","تعادل على المركز الثامن (القاعدة 6.15.1)","مخالفة: طلقة قبل الأمر LOAD","مخالفة: تعمير أكثر من 5 طلقات","مخالفة: طلقة بعد LOAD وقبل بدء المجموعة","مخالفة: طلقتان عند ظهور واحد للهدف","مخالفة: طلقات اختبار زائدة","مخالفة: وضع الاستعداد (مرتان)","ادعاء أمر ميدان غير صحيح (مرفوض)","ادعاء مخالفة زمنية (مرفوض)","ادعاء إزعاج (مرفوض)","عطل مسموح به (AM)","عطل غير مسموح به (NAM)","طلقة اختبار على هدف لاعب آخر","انقطاع أكثر من 15 دقيقة","مسدس مكسور: 15 دقيقة للإصلاح","كل الحالات في قطار واحد"],fromStart:"من البداية",
  usenames:"استخدام أسماء اللاعبين",nameshelp:"اكتب اسم العائلة لكل لاعب حسب نقطة رميه (1–12). كل قسم رمي به لاعبان: 1-2، 3-4، 5-6، 7-8، 9-10، 11-12.",
  pasteph:"أو الصق القائمة هنا، اسم في كل سطر بترتيب 1 إلى 12:\nMORENO ESP\nFARID EGY\n…",fill:"تعبئة من القائمة",clearn:"مسح الأسماء",famph:"اسم العائلة",nocph:"الدولة",
@@ -440,7 +449,7 @@ en:{eyebrow:"25m Rapid-Fire Pistol Men · Qualification · 2 stages × 30 shots 
  step:"Step",of:"of",cmdcap:"CRO / Range Officer commands and timing",nocmd:"No command in this step",train:"⏱ Train as CRO in real time from here",
  sayAt:"At zero, say:",sayNow:"Say now",wait:"Wait",pause:"Pause",resume:"Resume",nextStage:"Next stage",close:"Close",auto:"Continue automatically",beep:"Sound cue",
  prev:"← Back",next:"Next →",play:"▶ Play",stop:"■ Stop",speed:"Speed",quizme:"Quiz me before each step",
- voiceOn:"🔊 Play narration",voiceOff:"🔇 Stop narration",vmode:["Explanation and commands","Commands only"],vrate:["Normal speed","Slow","Fast"],novoice:"Device default voice",
+ voiceOn:"🔊 Play narration",voiceOff:"🔇 Stop narration",vmode:["Explanation and commands","Commands only"],vrate:["Normal speed","Slow","Fast"],novoice:"Device default voice",vEnL:"English voice (commands)",vArL:"Arabic voice (narration)",
  scen:["New random results…","Tie for 8th place (Rule 6.15.1)","Irregularity: shot before LOAD","Irregularity: more than 5 cartridges loaded","Irregularity: shot after LOAD, before the series starts","Irregularity: two shots at one target appearance","Irregularity: too many sighting shots","Irregularity: READY position (twice)","Incorrect range command claim (not justified)","Timing irregularity claim (not justified)","Disturbance claim (not justified)","ALLOWABLE malfunction (AM)","NON-ALLOWABLE malfunction (NAM)","Sighting shot on another athlete's target","Interruption over 15 minutes","Broken pistol: 15 minutes to repair","All cases in one relay"],fromStart:"From the start",
  usenames:"Use athletes' names",nameshelp:"Enter each athlete's family name by firing point (1–12). Each range section holds two athletes: 1-2, 3-4, 5-6, 7-8, 9-10, 11-12.",
  pasteph:"Or paste the list here, one name per line for 1 to 12:\nMORENO ESP\nFARID EGY\n…",fill:"Fill from list",clearn:"Clear names",famph:"Family name",nocph:"NOC",
@@ -810,7 +819,7 @@ function render(animate){
   [1,2,4,8,16].forEach(v=>$("sp"+v).setAttribute("aria-pressed",SPEED===v));
   fillSelect($("vmode"),tt.vmode); fillSelect($("vrate"),tt.vrate); fillSelect($("scen"),tt.scen,SCEN);
   $("bvoice").textContent=VOICE_ON?tt.voiceOff:tt.voiceOn; fillVoices();
-  $("bstart").textContent=tt.fromStart; $("kbdhint").innerHTML=tt.kbd; $("sndbtn").textContent=SOUND?tt.snd1:tt.snd0; $("sndbtn").setAttribute("aria-pressed",SOUND); $("bvoice").disabled=!synth; $("tbeep").disabled=!SOUND; $("clisten").disabled=!synth; $("fsbtn").textContent=document.fullscreenElement?tt.fsx:tt.fs;
+  $("bstart").textContent=tt.fromStart; $("kbdhint").innerHTML=tt.kbd; { const av=$("aivoice"); av.hidden=lang!=="ar"; av.innerHTML=lang==="ar"?"تمت ترجمة الصوت بالذكاء الاصطناعي.<br>ولهذا هناك أخطاء في نطق بعض الكلمات باللغة العربية.":""; } $("sndbtn").textContent=SOUND?tt.snd1:tt.snd0; $("sndbtn").setAttribute("aria-pressed",SOUND); $("bvoice").disabled=!synth; $("tbeep").disabled=!SOUND; $("clisten").disabled=!synth; $("fsbtn").textContent=document.fullscreenElement?tt.fsx:tt.fs;
   const PL={1:{ar:"الذهبية",en:"gold"},2:{ar:"الفضية",en:"silver"},3:{ar:"البرونزية",en:"bronze"}};
   $("scennote").textContent=(((!EVENTS.length&&!IRRN.length)?tt.scenNote.none:(EVENTS.length?tt.scenNote.tie:""))+(IRRN.length?" "+tt.scenNote.irr+IRRN.map(L).join(lang==="ar"?"، ":", ")+".":"")).trim();
   $("tautol").textContent=tt.auto; $("tbeepl").textContent=tt.beep; $("tnext").textContent=tt.nextStage; $("tclose").textContent=tt.close;
@@ -965,23 +974,48 @@ let SOUND=false; try{ if(localStorage.getItem(KEY+"-sound")==="1") SOUND=true; }
 const synth=("speechSynthesis" in window)?window.speechSynthesis:null;
 function voicesNow(){ try{ const v=synth?synth.getVoices():[]; if(v&&v.length) VOICES=v; }catch(e){} return VOICES; }
 function loadVoices(){ voicesNow(); fillVoices(); }
-let VOICE_PREF=null; try{ VOICE_PREF=localStorage.getItem(KEY+"-voice"); }catch(e){}
+let VOICE_PREF=null, VOICE_PREF_AR=null; try{ VOICE_PREF=localStorage.getItem(KEY+"-voice"); VOICE_PREF_AR=localStorage.getItem(KEY+"-voicear"); }catch(e){}
+/* novelty / effect voices of Apple devices are not offered as narrators */
+const FX=/^(Albert|Bad News|Bahh|Bells|Boing|Bubbles|Cellos|Good News|Jester|Organ|Superstar|Trinoids|Whisper|Wobble|Zarvox|Deranged|Hysterical|Pipe Organ)\b/i;
 const isEn=v=>(v.lang||"").toLowerCase().startsWith("en"), isAr=v=>(v.lang||"").toLowerCase().startsWith("ar");
 function defaultEn(){ const en=VOICES.filter(isEn);
   return en.find(v=>v.name==="Daniel"&&/en-GB/i.test(v.lang)) || en.find(v=>/^daniel\b/i.test(v.name)) || en.find(v=>/en-GB/i.test(v.lang)&&v.localService) || en.find(v=>/en-GB/i.test(v.lang)) || en.find(v=>v.localService) || en[0] || null; }
 function defaultAr(){ const ar=VOICES.filter(isAr); return ar.find(v=>v.localService)||ar[0]||null; }
-function fillVoices(){ const sel=$("vvoice"); const en=VOICES.filter(isEn);
+function fillVoices(){ const tt=t(); if($("vvoicel")) $("vvoicel").textContent=tt.vEnL; if($("vvoicearl")) $("vvoicearl").textContent=tt.vArL;
+  { const sa=$("vvoicear"); const ar=VOICES.filter(v=>isAr(v)&&!FX.test(v.name)); const da=defaultAr(); const ka=VOICE_PREF_AR||sa.value;
+    sa.innerHTML=ar.length?ar.map(v=>`<option value="${esc(v.name)}">${esc(v.name)} (${esc(v.lang)})${da&&v.name===da.name?" ★":""}</option>`).join(""):`<option value="">${esc(tt.novoice)}</option>`;
+    sa.value=ar.some(v=>v.name===ka)?ka:(da?da.name:""); }
+  const sel=$("vvoice"); const en=VOICES.filter(v=>isEn(v)&&!FX.test(v.name));
   const keep=VOICE_PREF||sel.value; const d=defaultEn();
   sel.innerHTML=en.length?en.map(v=>`<option value="${esc(v.name)}">${esc(v.name)} (${esc(v.lang)})${d&&v.name===d.name?" ★":""}</option>`).join(""):`<option value="">${esc(t().novoice)}</option>`;
   sel.value=en.some(v=>v.name===keep)?keep:(d?d.name:""); }
 if(synth){ loadVoices(); try{ synth.addEventListener?synth.addEventListener("voiceschanged",loadVoices):(synth.onvoiceschanged=loadVoices); }catch(e){}
   let tries=0; const poll=setInterval(()=>{ const had=VOICES.length; voicesNow(); if(VOICES.length!==had) fillVoices(); if(VOICES.length||++tries>60) clearInterval(poll); },250); }
-function pickVoice(arabic){ voicesNow(); if(arabic) return defaultAr(); const want=$("vvoice").value; return VOICES.find(x=>x.name===want&&isEn(x)) || defaultEn(); }
+function pickVoice(arabic){ voicesNow(); if(arabic){ const wa=$("vvoicear").value; return VOICES.find(x=>x.name===wa&&isAr(x)) || defaultAr(); } const want=$("vvoice").value; return VOICES.find(x=>x.name===want&&isEn(x)) || defaultEn(); }
+/* ---- Arabic pronunciation: vocalised forms of the shooting terms the device voice tends to misread ---- */
+const SAY_AR=[["لجنة الحكام","لَجْنَةُ الحُكَّام"],["ضباط الميدان","ضُبَّاطِ المَيْدَان"],["رئيس ضباط الميدان","رَئِيسُ ضُبَّاطِ المَيْدَان"],["ضابط الميدان","ضَابِطُ المَيْدَان"],
+ ["الشحنة الدافعة","الشُّحْنَةَ الدَّافِعَة"],["الإعداد والاختبار","الإِعْدَادِ وَالاِخْتِبَار"],["الدائرة الكاملة","الدَّائِرَةِ الكَامِلَة"],["الكسور العشرية","الكُسُورِ العَشْرِيَّة"],["العشرات الداخلية","العَشَرَاتِ الدَّاخِلِيَّة"],
+ ["رشتين","رَشَّتَيْن"],["رشتان","رَشَّتَان"],["رشة","رَشَّة"],["المرتكز","المُرْتَكِز"],["مرتكز","مُرْتَكِز"],["الراقد","الرَّاقِد"],["راقد","رَاقِد"],["الواقف","الوَاقِف"],
+ ["طلقتين","طَلْقَتَيْن"],["طلقتان","طَلْقَتَان"],["طلقات","طَلَقَات"],["طلقة","طَلْقَة"],["طلقته","طَلْقَتَه"],["الحكام","الحُكَّام"],["ضباط","ضُبَّاط"],["الاختبار","الاِخْتِبَار"],["الإعداد","الإِعْدَاد"],
+ ["تُحتسب","تُحْتَسَب"],["تحتسب","تُحْتَسَب"],["تُسجَّل","تُسَجَّل"],["صفراً","صِفْرًا"],["صفرا","صِفْرًا"],["أصفاراً","أَصْفَارًا"],["صفر","صِفْر"],["مخالفة","مُخَالَفَة"],["المخالفة","المُخَالَفَة"],["خصم","خَصْم"],["يُخصم","يُخْصَم"],
+ ["نقطتان","نُقْطَتَان"],["نقطتين","نُقْطَتَيْن"],["القطار","القِطَار"],["قطار","قِطَار"],["القطارات","القِطَارَات"],["الهدف","الهَدَف"],["هدف","هَدَف"],["أهداف","أَهْدَاف"],["الأهداف","الأَهْدَاف"],
+ ["النداء","النِّدَاء"],["الخط","الخَطّ"],["النهائي","النِّهَائِي"],["النهائيات","النِّهَائِيَّات"],["سيدة","سَيِّدَة"],["لاعبة","لاعِبَة"],["رجل","رَجُل"],["عطل","عُطْل"],["مسدس","مُسَدَّس"],["المسدس","المُسَدَّس"],
+ ["بندقية","بُنْدُقِيَّة"],["البندقية","البُنْدُقِيَّة"],["المجموعة","المَجْمُوعَة"],["مجموعة","مَجْمُوعَة"],["التأهيل","التَّأْهِيل"],["التعادل","التَّعَادُل"],["يُفض","يُفَضّ"],["الذخيرة","الذَّخِيرَة"],
+ ["أعلام الأمان","أَعْلَامِ الأَمَان"],["الرمي الجاف","الرَّمْيِ الجَافّ"],["تمارين الحمل والتصويب","تَمَارِينِ الحَمْلِ وَالتَّصْوِيب"],["خط الرمي","خَطِّ الرَّمْي"],["المسدسات","المُسَدَّسَات"],["مسدسات","مُسَدَّسَات"],["مرئية","مَرْئِيَّة"],["ومواجهة","وَمُوَاجِهَة"],["مواجهة","مُوَاجِهَة"],["وتناول","وَتَنَاوُل"],["تناول","تَنَاوُل"],["إزالة","إِزَالَة"],["يجوز","يَجُوز"],["للاعبين","لِلَّاعِبِين"],["اللاعبين","اللَّاعِبِين"],["الأهداف","الأَهْدَاف"],["وقت الإعداد","وَقْتُ الإِعْدَاد"],["بالأمر","بِالأَمْر"],["يبدأ","يَبْدَأ"],["وتكون","وَتَكُون"],
+ ["10م","عَشَرَةِ أَمْتَار"],["50م","خَمْسِينَ مِتْرًا"],["م1","المَجْمُوعَةُ الأُولَى"]];
+const AL="\\u0600-\\u06FF";
+const SAY_RE=SAY_AR.sort((a,b)=>b[0].length-a[0].length).map(([w,v])=>[new RegExp("(^|[^"+AL+"])([وفب]?)"+w.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"(?=$|[^"+AL+"])","g"),v]);
+function sayAr(t){ let o=" "+t+" "; SAY_RE.forEach(([re,v])=>{ o=o.replace(re,(m,a,b)=>a+b+v); }); return o.trim(); }
+/* an Arabic sentence with English commands inside is read in pieces: Arabic by the Arabic voice, English by the English voice */
+function sayPieces(pt){ if(!/[؀-ۿ]/.test(pt)) return [{t:pt,ar:false}];
+  const out=[]; const re=/[A-Za-z][A-Za-z0-9'’\-]*(?:[ .…·]+[A-Za-z0-9][A-Za-z0-9'’\-]*)*/g; let last=0, m;
+  while((m=re.exec(pt))){ const a=pt.slice(last,m.index); if(/[؀-ۿ0-9]/.test(a)) out.push({t:sayAr(a),ar:true}); out.push({t:m[0],ar:false}); last=m.index+m[0].length; }
+  const r=pt.slice(last); if(/[؀-ۿ0-9]/.test(r)) out.push({t:sayAr(r),ar:true}); return out; }
 function speak(text){
   if(!synth||!SOUND||!text) return;
   const parts=String(text).split(/(?<=[.!?؟…])\s+/).map(x=>x.trim()).filter(Boolean);
   const rate=[1,.8,1.2][$("vrate").selectedIndex]||1;
-  const run=()=>{ try{ window.__apU=[]; parts.forEach(pt=>{ const arabic=/[؀-ۿ]/.test(pt); const v=pickVoice(arabic); const u=new SpeechSynthesisUtterance(pt);
+  const run=()=>{ try{ window.__apU=[]; parts.flatMap(sayPieces).forEach(pc=>{ const pt=pc.t, arabic=pc.ar; const v=pickVoice(arabic); const u=new SpeechSynthesisUtterance(pt);
       if(v){u.voice=v;u.lang=v.lang;} else u.lang=arabic?"ar":"en-GB"; u.rate=rate; u.volume=1; window.__apU.push(u); synth.speak(u); }); if(synth.paused&&synth.resume) synth.resume(); }catch(e){} };
   try{ if(synth.speaking||synth.pending){ synth.cancel(); setTimeout(run,80); } else run(); }catch(e){}
 }
@@ -1132,7 +1166,10 @@ $("seek").oninput=e=>{stopPlay(); $("gate").hidden=true; go(+e.target.value,fals
 [1,2,4,8,16].forEach(v=>{ $("sp"+v).onclick=()=>{SPEED=v; [1,2,4,8,16].forEach(w=>$("sp"+w).setAttribute("aria-pressed",SPEED===w));}; });
 $("scen").onchange=e=>newScenario(+e.target.value);
 $("bstart").onclick=()=>{stopPlay(); closeTrainer(); $("gate").hidden=true; go(0,false);};
-$("vmode").onchange=()=>speakStep(); $("vvoice").onchange=e=>{ VOICE_PREF=e.target.value; try{localStorage.setItem(KEY+"-voice",VOICE_PREF)}catch(x){} speak("START"); }; $("vrate").onchange=()=>speakStep();
+$("vmode").onchange=()=>speakStep(); function sampleVoice(arabic){ const was=SOUND; SOUND=true; speak(arabic?"انتباه. ابدأ.":"ATHLETES TO THE LINE."); SOUND=was; }
+$("vvoice").onchange=e=>{ VOICE_PREF=e.target.value; try{localStorage.setItem(KEY+"-voice",VOICE_PREF)}catch(x){} sampleVoice(false); };
+$("vvoicear").onchange=e=>{ VOICE_PREF_AR=e.target.value; try{localStorage.setItem(KEY+"-voicear",VOICE_PREF_AR)}catch(x){} sampleVoice(true); };
+$("vtesten").onclick=()=>sampleVoice(false); $("vtestar").onclick=()=>sampleVoice(true); $("vrate").onchange=()=>speakStep();
 function applyNames(){ computeNames(); saveNames(); rebuild(true); render(false); }
 function renderNames(){ const tt=t(); const box=$("names"); box.innerHTML="";
   $("usenames").checked=USE_NAMES; $("usenamesl").textContent=tt.usenames; $("namespanel").hidden=!USE_NAMES;
